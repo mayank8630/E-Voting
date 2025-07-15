@@ -1,16 +1,21 @@
-const express = require('express');
-const path = require('path');
+const express = require("express");
+const cors = require("cors");
 const app = express();
-const authRoutes = require('./routes/auth');
+js
+const path = require("path");
+app.use(express.static(path.join(__dirname)));
 
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "index.html"));
+});
+js
+const fs = require("fs");
+const usersFile = path.join(__dirname, "data", "users.json");
+const votesFile = path.join(__dirname, "data", "votes.json");
+
+app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname, '../frontend')));
-
-app.use('/api/auth', authRoutes);
-
-const PORT = 3000;
-app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${5000}`);
+app.listen(5000, () => {
+    console.log("Server running on http://localhost:5000");
 });
